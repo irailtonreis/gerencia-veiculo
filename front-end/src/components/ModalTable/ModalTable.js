@@ -1,10 +1,9 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
-import './styles.css';
+// import './styles.css';
 import api from '../../services/api';
 
-
-const CadastroVeiculo = () => {
+const ModalTable = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
         const response = await api.post('veiculos', data)
@@ -43,4 +42,4 @@ const CadastroVeiculo = () => {
     )
 }
 
-export default CadastroVeiculo
+export default ModalTable

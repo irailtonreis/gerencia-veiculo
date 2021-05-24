@@ -1,16 +1,18 @@
 
 import './App.css';
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import MenuVeiculo from './components/VeiculoTable/VeiculoTable';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+// import MenuVeiculo from './components/VeiculoTable/VeiculoTable';
+import CadastroVeiculo from './components/CadastroVeiculo/CadastroVeiculo';
+import VeiculoTable from './components/VeiculoTable/VeiculoTable';
 
 function App() {
   return (
     <div className="App">
        <BrowserRouter>
         <Switch>
-          <MenuVeiculo />
-          <Route exact path="/" component={() => <h1>Listagem veiculos</h1>} />
-          <Route path="/cadastro" component={() => <h1>Cadastro veiculos</h1>} />
+          {/* <MenuVeiculo /> */}
+          <Route exact path="/" component={VeiculoTable} />
+          <Route exact path="/cadastrar" component={CadastroVeiculo} />
         </Switch>
   </BrowserRouter>
     </div>
