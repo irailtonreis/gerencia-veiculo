@@ -110,6 +110,7 @@ table th {
     opacity: 0;
     transform: translateX(-20px);
     animation: animeLeft .3s forwards;
+
   }
   
   @keyframes animeLeft{
@@ -118,6 +119,8 @@ table th {
       transform: initial;
     }
   }
+
+
   /* Modal Content/Box */
   .modal-content {
   border-radius: 5px;

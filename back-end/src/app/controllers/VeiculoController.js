@@ -3,7 +3,9 @@ const { Veiculo } = require('../models');
 class VeiculoController {
   async index(req, res) {
     try {
-      const veiculos = await Veiculo.findAll();
+      const veiculos = await Veiculo.findAll({order: [
+        ['id', 'DESC'],
+    ],});
 
       return res.json(veiculos);
     } catch (err) {
