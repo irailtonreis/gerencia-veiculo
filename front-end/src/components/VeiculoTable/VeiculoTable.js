@@ -23,7 +23,7 @@ const VeiculoTable =() => {
     const [marca, setMarca] = useState();
     const [ano, setAno] = useState();
     const [descricao, setDescricao] = useState();
-    const [vendido, setVendido] = useState();
+    const [vendido, setVendido] = useState(false);
 
     const [formData, updateFormData] = React.useState(initialFormData);
     // const [modal, setModal] = useState(false);
@@ -84,6 +84,7 @@ const VeiculoTable =() => {
     const handleEdit = (item) => {
         console.log("teste", item);
         var modal = document.getElementById("myModal");
+        console.log(item)
         setVeiculo(item)
         modal.style.display = "block";
         // setModal(!modal)
@@ -93,20 +94,26 @@ const VeiculoTable =() => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-       const data = {
-            veiculo: veiculo,
-            marca: marca,
-            ano: ano,
-            descricao: descricao,
-            vendido: vendido
-        }
-        const response = await api.post(`veiculos`, data)
+        const data = {
+                veiculo: veiculo,
+                marca: marca,
+                ano: ano,
+                descricao: descricao,
+                vendido: vendido
+            }
 
-        if (response.data) {
-            const response = await api.get(`veiculos`)
-            setVeiculos(response.data)
-            handleModal();
+        try {
+            const response = await api.post(`veiculos`, data)
+
+            if (response.data) {
+                const response = await api.get(`veiculos`)
+                setVeiculos(response.data)
+                handleModal();
+            }
+        } catch (error) {
+            console.log(error)
         }
+      
       };
       const handleModal = () => {
         var modal = document.getElementById("myModal");
@@ -116,10 +123,11 @@ const VeiculoTable =() => {
 
       
 
-      const handleDelete = async (id) => {
+      const handleDelete = async (e, id) => {
+        e.preventDefault();
         const confirmation = window.confirm("Deseja realmente deletar?");
         if (confirmation) {
-            const response = await api.put(`veiculos/${id}`)
+            const response = await api.delete(`veiculos/${id}`)
             if(response.status === 200){
                 const deleted = await api.get(`veiculos`)
                 setVeiculos(deleted.data)
@@ -137,7 +145,7 @@ const VeiculoTable =() => {
                 <tr>
                 {
                 cols.map((colName)=>(
-                    <th scope="col">{colName}</th>
+                    <th key={colName} scope="col">{colName}</th>
                     ))
                 }
                 </tr>
@@ -151,18 +159,17 @@ const VeiculoTable =() => {
                     <td>{column.ano}</td>
                     <td>{column.descricao}</td>
                     <td>{column.vendido ? 'SIM' : 'NÃO'}</td>
-                    <td ><div className="action"><MdAddCircleOutline onClick={activeModal}  size={30}/><BiEdit size={30} onClick={()=>handleEdit(column)} /><MdDeleteForever size={30} onClick={()=>handleDelete(column.id)} /></div></td>
+                    <td ><div className="action"><MdAddCircleOutline onClick={activeModal}  size={30}/><BiEdit size={30} onClick={()=>handleEdit(column)} /><MdDeleteForever size={30} onClick={(e)=>handleDelete(e, column.id)} /></div></td>
                     </tr>
                 ))
                 }
                 </tbody>
         </table>
-        {/* {modal ? <ModalTable /> : null} */}
-            <form onSubmit={handleSubmit}>
             <div id="myModal" className="modal">
                 <div className="modal-content animeLeft">
                 <span className="close" onClick={handleModal}>&times;</span>
-                {/* <FormVeiculo  veiculo={veiculo} /> */}
+                <FormVeiculo veiculoAtual={veiculo} setVeiculos={setVeiculos} />
+                {/* <form onSubmit={handleSubmit}>
                     <label>Nome do veículo</label>
                     <input name="veiculo"  onChange={(e) => setVeiculo(e.target.value)} value={veiculo} required /> 
                     <label>Marca do veículo</label>
@@ -170,21 +177,18 @@ const VeiculoTable =() => {
                     <label>Ano do veículo</label>
                     <input type="number" name="ano"  onChange={(e) => setAno(e.target.value)} value={ano}   required /> 
                     <label>Descrição do veículo</label>
-                    <input type="textarea" name="descricao" rows="4" cols="10" onChange={(e) => setDescricao(e.target.value)} value={descricao} required /> 
+                    <textarea name="descricao" rows="4" cols="10" onChange={(e) => setDescricao(e.target.value)} value={descricao} required /> 
                     <label>Status vendido</label>
-                    <select name="vendido" onChange={(e) => setVendido(e.target.value)} required>
-                    <option value="" selected disabled hidden>
-                    Selecione a opção
-                    </option>
+                    <select name="vendido"  defaultValue={vendido}   onChange={(e) => setVendido(e.target.value)} required>
                     <option value={false}>NÃO</option>
                     <option value={true}>SIM</option>
                     </select> 
                     <div className="submit-button">
                     <button type="submit">Cadastrar</button>
                     </div>
+                </form> */}
                 </div>
                 </div>
-            </form>
         </div>
 
        

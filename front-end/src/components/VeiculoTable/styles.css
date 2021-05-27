@@ -147,3 +147,7 @@ table th {
   text-decoration: none;
   cursor: pointer;
   }
+
+  textarea{
+    width: 100%;
+  }
