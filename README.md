@@ -19,7 +19,7 @@ Desenvolvimento de uma API restful para cadastro, edição, visualização e exc
 ## Instalação
 
  Requerido node v12.18.0;
- MySql: 5.7 ou 5.8;
+ MySql: 5.7 ou 8.0;
  npm ou yarn; 
 
 Faça o clone para a pasta se sua preferência 
@@ -31,6 +31,9 @@ cd gerencia-veiculo
 Instale as dependências do backend
 ```sh
 cd back-end
+```
+Execute
+```sh
 npm install ou yarn install 
 ```
 Configure o .env.example renomeando para .env e adicione variáveis de ambiente
@@ -50,18 +53,20 @@ Para iniciar o servidor execute:
 npm start ou yarn start 
 ```
 Reberará uma mensagem executando: porta:333;
-Instale as dependências do Frontend
+
+Instale as dependências do Frontend;
 ```sh
 cd front-end
+```
+Execute 
+```sh
 npm install ou yarn install 
 ```
 Após instalar dependêcias execute o servidor
 ```sh
-cd front-end
 npm start ou yarn start
 ```
 Acesse o navegador na porta localhost:3000
-
 
 
 ### 1. Visualização 
