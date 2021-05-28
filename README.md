@@ -61,3 +61,17 @@ cd front-end
 npm start ou yarn start
 ```
 Acesse o navegador na porta localhost:3000
+
+
+
+### 1. Visualização 
+<img src='/images/01-veiculo.PNG' width='800px'>
+
+### 2. Cadastro
+<img src='/images/02-veiculo.PNG' width='800px'>
+
+### 4. Edição 
+<img src='/images/03-veiculo.PNG' width='800px'>
+
+### 3. Delete
+<img src='/images/04-veiculo.PNG' width='800px'>

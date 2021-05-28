@@ -72,7 +72,7 @@ const FormVeiculo = ({inativeModal, veiculoAtual, setVeiculos}) => {
                 <option value={true}>SIM</option>
             </select> 
             <div className="submit-button">
-              <button type="submit">Editar</button>
+              <button type="submit">Salvar</button>
             </div>
       </form>
     )
