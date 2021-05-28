@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './styles.css';
 import api from '../../services/api';
 
-const CadastroVeiculo = ({ setVeiculos, inativeModal, clearForm }) => {
+const CadastroVeiculo = ({ setVeiculos, inativeModal}) => {
   const [veiculo, setVeiculo] = useState();
   const [marca, setMarca] = useState();
   const [ano, setAno] = useState();
@@ -25,13 +25,13 @@ const CadastroVeiculo = ({ setVeiculos, inativeModal, clearForm }) => {
                 if (response.data) {
                     const response = await api.get(`veiculos`)
                     setVeiculos(response.data)
-                    // setVeiculo('')
+                    setVeiculo('')
                     setMarca('')
                     setAno('')
                     setDescricao('')
-                    setVendido('')
-                    inativeModal()
-                    clearForm()
+                    setVendido(false)
+                    inativeModal("modalCadastro")
+                    // clearForm()
                 }
             } catch (error) {
                 console.log(error)
@@ -50,7 +50,7 @@ const CadastroVeiculo = ({ setVeiculos, inativeModal, clearForm }) => {
             <textarea name="descricao" rows="4" cols="10" onChange={(e) => setDescricao(e.target.value)} value={descricao} required /> 
             <label>Status vendido</label>
             <select name="vendido"  defaultValue={vendido}   onChange={(e) => setVendido(e.target.value)} required>
-            <option value={false}>NÃO</option>
+            <option  value={false}>NÃO</option>
             <option value={true}>SIM</option>
             </select> 
             <div className="submit-button">

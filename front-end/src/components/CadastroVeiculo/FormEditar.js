@@ -2,12 +2,28 @@ import React, { useState, useEffect } from 'react'
 import './styles.css';
 import api from '../../services/api';
 
-const FormVeiculo = ({veiculoAtual, setVeiculos}) => {
-  const [veiculo, setVeiculo] = useState();
-  const [marca, setMarca] = useState();
-  const [ano, setAno] = useState();
-  const [descricao, setDescricao] = useState();
-  const [vendido, setVendido] = useState(false);
+const FormVeiculo = ({inativeModal, veiculoAtual, setVeiculos}) => {
+  const [veiculo, setVeiculo] = useState(null);
+  const [marca, setMarca] = useState(null);
+  const [ano, setAno] = useState(null);
+  const [descricao, setDescricao] = useState(null);
+  const [vendido, setVendido] = useState(undefined);
+
+      useEffect(() => {
+        setVeiculo(veiculoAtual.veiculo)
+        setMarca(veiculoAtual.marca)
+        setAno(veiculoAtual.ano)
+        setDescricao(veiculoAtual.descricao)
+        setVendido(veiculoAtual.vendido)
+    }, [veiculoAtual])
+
+  //   useEffect(() => {
+  //     setVeiculo(veiculoAtual.veiculo)
+  //     setMarca(veiculoAtual.marca)
+  //     setAno(veiculoAtual.ano)
+  //     setDescricao(veiculoAtual.descricao)
+  //     setVendido(veiculoAtual.vendido)
+  // }, [])
 
 
      const handleSubmit = async (e) => {
@@ -26,6 +42,12 @@ const FormVeiculo = ({veiculoAtual, setVeiculos}) => {
           if (response.data) {
               const response = await api.get(`veiculos`)
               setVeiculos(response.data)
+              setVeiculo('')
+              setMarca('')
+              setAno('')
+              setDescricao('')
+              setVendido(false)
+              inativeModal("modalEdit")
           }
 
       } catch (error) {
@@ -33,13 +55,7 @@ const FormVeiculo = ({veiculoAtual, setVeiculos}) => {
       }
    
       };
-    useEffect(() => {
-      if (veiculoAtual) {
-        setVeiculo(veiculoAtual.veiculo)
-        setMarca(veiculoAtual.marca)
-      }
-      
-    }, [])
+   
     return (
       <form onSubmit={handleSubmit}>
             <label>Nome do veículo</label>

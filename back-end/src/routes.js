@@ -6,7 +6,7 @@ const routes = Router();
 routes.get('/veiculos', VeiculoController.index);
 
 routes.get('/veiculos/:id', VeiculoController.show);
-console.log("chegou", process.env.DB_HOST)
+
 routes.post('/veiculos', VeiculoController.store);
 
 routes.put('/veiculos/:id', VeiculoController.update);
